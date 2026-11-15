@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VUSAL CYBER</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#020503;color:#00ff66;font-family:monospace;text-align:center;overflow:hidden}
+canvas{position:fixed;inset:0}
+.panel{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:25px;background:#0008}
+.logo{font-size:42px;font-weight:bold;text-shadow:0 0 20px #00ff66}
+.line{width:90%;height:1px;background:#00ff66;margin:25px}
+.warning{color:red;font-size:30px;font-weight:bold;animation:blink 1s infinite}
+.sub{font-size:23px;margin-top:25px;text-shadow:0 0 15px #00ff66}
+@keyframes blink{50%{opacity:.3}}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="panel">
+<div class="logo">VUSAL CYBER</div>
+<div class="line"></div>
+<div class="warning">SYSTEM BREACH</div>
+<h2>TELEFONUNUZ HACKER TƏRƏFİNDƏN ƏLƏ KEÇİRİLDİ</h2>
+<div class="line"></div>
+<div class="sub">İZLƏNİRSİNİZ</div>
+</div>
+<script>
+let c=document.getElementById('matrix'),x=c.getContext('2d'),d=[];
+function resize(){c.width=innerWidth;c.height=innerHeight;d=Array(Math.floor(c.width/15)).fill(1)}
+resize();onresize=resize;
+function draw(){
+x.fillStyle='rgba(0,0,0,.09)';x.fillRect(0,0,c.width,c.height);
+x.fillStyle='#00ff55';x.font='15px monospace';
+d.forEach((y,i)=>{x.fillText(Math.random()>.5?'1':'0',i*15,y*15);if(y*15>c.height&&Math.random()>.97)d[i]=0;d[i]++});
+requestAnimationFrame(draw)}
+draw();
+</script>
+</body>
+</html>

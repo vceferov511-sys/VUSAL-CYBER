@@ -2,40 +2,65 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VUSAL CYBER</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#020503;color:#00ff66;font-family:monospace;text-align:center;overflow:hidden}
-canvas{position:fixed;inset:0}
-.panel{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:25px;background:#0008}
-.logo{font-size:42px;font-weight:bold;text-shadow:0 0 20px #00ff66}
-.line{width:90%;height:1px;background:#00ff66;margin:25px}
-.warning{color:red;font-size:30px;font-weight:bold;animation:blink 1s infinite}
-.sub{font-size:23px;margin-top:25px;text-shadow:0 0 15px #00ff66}
-@keyframes blink{50%{opacity:.3}}
+body{margin:0;background:#000;color:#00ff41;font-family:monospace;text-align:center;overflow:hidden}
+#matrix{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.content{position:relative;z-index:2;padding:25px 15px}
+h1{font-size:32px;text-shadow:0 0 15px #00ff41;margin-top:65px}
+button{background:#00ff41;color:#000;border:0;padding:17px 35px;font-size:20px;font-weight:bold;border-radius:8px;margin-top:35px}
+#alert{display:none;margin-top:35px}
+.warning{color:red;font-size:24px;font-weight:bold;animation:blink .6s infinite}
+.message{color:#00ff41;font-size:17px;margin-top:25px;line-height:2}
+@keyframes blink{50%{opacity:.15}}
+#reveal{display:none;color:white;margin-top:30px;font-size:14px}
 </style>
 </head>
 <body>
 <canvas id="matrix"></canvas>
-<div class="panel">
-<div class="logo">VUSAL CYBER</div>
-<div class="line"></div>
-<div class="warning">SYSTEM BREACH</div>
-<h2>TELEFONUNUZ HACKER TƏRƏFİNDƏN ƏLƏ KEÇİRİLDİ</h2>
-<div class="line"></div>
-<div class="sub">İZLƏNİRSİNİZ</div>
+<div class="content">
+<h1>VUSAL CYBER</h1>
+<div id="start">
+<p>🎬 Video hazırdır</p>
+<button onclick="startShow()">▶ VIDEO İZLƏ</button>
+</div>
+<div id="alert">
+<p class="warning">⚠ SİSTEM XƏBƏRDARLIĞI ⚠</p>
+<p class="message">
+SİSTEM ANALİZ EDİLİR...<br>
+TƏHLÜKƏSİZLİK YOXLAMASI...<br>
+VUSAL CYBER AKTİVDİR
+</p>
+<p class="warning">SİSTEMƏ GİRİŞ AŞKARLANDI!</p>
+<div id="reveal">😂 SAKİT OL! BU SADƏCƏ VÜSALIN ZARAFATIDIR 😂</div>
+</div>
 </div>
 <script>
-let c=document.getElementById('matrix'),x=c.getContext('2d'),d=[];
-function resize(){c.width=innerWidth;c.height=innerHeight;d=Array(Math.floor(c.width/15)).fill(1)}
-resize();onresize=resize;
+const c=document.getElementById("matrix"),ctx=c.getContext("2d");
+let drops=[];
+function resize(){
+c.width=innerWidth;c.height=innerHeight;
+drops=Array(Math.floor(c.width/16)).fill(1);
+}
+resize();window.addEventListener("resize",resize);
 function draw(){
-x.fillStyle='rgba(0,0,0,.09)';x.fillRect(0,0,c.width,c.height);
-x.fillStyle='#00ff55';x.font='15px monospace';
-d.forEach((y,i)=>{x.fillText(Math.random()>.5?'1':'0',i*15,y*15);if(y*15>c.height&&Math.random()>.97)d[i]=0;d[i]++});
-requestAnimationFrame(draw)}
-draw();
+ctx.fillStyle="rgba(0,0,0,.08)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="#00ff41";ctx.font="15px monospace";
+drops.forEach((y,i)=>{
+ctx.fillText(Math.random()>.5?"1":"0",i*16,y*16);
+if(y*16>c.height&&Math.random()>.975)drops[i]=0;
+drops[i]++;
+});
+}
+setInterval(draw,45);
+function startShow(){
+document.getElementById("start").style.display="none";
+document.getElementById("alert").style.display="block";
+setTimeout(()=>document.getElementById("reveal").style.display="block",9000);
+}
 </script>
 </body>
 </html>
